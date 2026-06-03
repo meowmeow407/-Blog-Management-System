@@ -29,9 +29,10 @@ RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cac
 
 EXPOSE 80
 
-# --- Automate cache clearing and migrations on startup ---
+# Run migrations FIRST to create the cache and sessions tables, THEN cache the configuration safely
 CMD cd /var/www/html && \
     php artisan config:clear && \
     php artisan cache:clear && \
     php artisan migrate --force && \
+    php artisan config:cache && \
     apache2-foreground
