@@ -2,6 +2,11 @@
 
 Chronicle is a high-performance, fully responsive blogging and notice board application built using **Laravel 11**, **MySQL**, and **jQuery/AJAX**. It features a glassmorphic dark-theme by default with a fully functional light-theme toggle, dynamic filtering, and a secure administration CRUD dashboard.
 
+## 🌐 Project Links
+
+* **GitHub Repository**: [https://github.com/meowmeow407/-Blog-Management-System](https://github.com/meowmeow407/-Blog-Management-System)
+* **Live Website URL**: [https://blog-management-system-1-f6ko.onrender.com/](https://blog-management-system-1-f6ko.onrender.com/)
+* 
 ---
 
 ## 🌟 Key Features
@@ -66,15 +71,15 @@ Launch the local development server:
 ```bash
 php artisan serve
 ```
-Open [http://127.0.0.1:8000](http://127.0.0.1:8000) in your web browser.
+Open [https://blog-management-system-1-f6ko.onrender.com/] in your web browser.
 
 ---
 
 ## 🔐 Default Admin Account
 For testing and verification purposes, you can log in to the admin panel using the following seeded credentials:
-* **Login URL**: `http://127.0.0.1:8000/admin/login`
-* **Email Address**: `admin@blog.com`
-* **Password**: `admin123`
+* **Login URL**: `https://blog-management-system-1-f6ko.onrender.com/`
+* **Email Address**: `adminblog@gmail.com`
+* **Password**: `123456`
 
 ---
 
