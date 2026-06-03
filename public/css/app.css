@@ -8,15 +8,15 @@
     --bg-secondary: #131a2c;
     --bg-glass: rgba(19, 26, 44, 0.65);
     --border-glass: rgba(255, 255, 255, 0.08);
-    --border-glass-focus: rgba(139, 92, 246, 0.4);
+    --border-glass-focus: rgba(255, 107, 0, 0.4);
     
     --text-primary: #f3f4f6;
     --text-secondary: #9ca3af;
     --text-muted: #6b7280;
     
-    --primary: #8b5cf6;
-    --primary-hover: #7c3aed;
-    --primary-glow: rgba(139, 92, 246, 0.35);
+    --primary: #ff6b00;
+    --primary-hover: #ea580c;
+    --primary-glow: rgba(255, 107, 0, 0.35);
     
     --accent: #ec4899;
     --accent-hover: #db2777;
@@ -213,7 +213,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .nav-btn-login {
-    background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(236, 72, 153, 0.1));
+    background: linear-gradient(135deg, rgba(255, 107, 0, 0.1), rgba(236, 72, 153, 0.1));
     border: 1px solid var(--border-glass);
     color: var(--text-primary);
 }
@@ -247,7 +247,7 @@ h1, h2, h3, h4, h5, h6 {
     margin: 0 auto 40px auto;
     padding: 60px 40px;
     border-radius: var(--radius-lg);
-    background: radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.15) 0%, rgba(236, 72, 153, 0.05) 50%, transparent 100%), var(--bg-secondary);
+    background: radial-gradient(circle at 80% 20%, rgba(255, 107, 0, 0.15) 0%, rgba(236, 72, 153, 0.05) 50%, transparent 100%), var(--bg-secondary);
     border: 1px solid var(--border-glass);
     overflow: hidden;
     text-align: center;
@@ -260,7 +260,7 @@ h1, h2, h3, h4, h5, h6 {
     left: -50%;
     width: 200%;
     height: 200%;
-    background: radial-gradient(circle, rgba(139, 92, 246, 0.03) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(255, 107, 0, 0.03) 0%, transparent 70%);
     pointer-events: none;
 }
 
@@ -864,7 +864,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .promo-widget {
-    background: radial-gradient(circle at 100% 100%, rgba(139,92,246,0.1) 0%, transparent 100%), var(--bg-secondary);
+    background: radial-gradient(circle at 100% 100%, rgba(255, 107, 0, 0.1) 0%, transparent 100%), var(--bg-secondary);
 }
 
 .promo-widget p {
@@ -920,11 +920,11 @@ h1, h2, h3, h4, h5, h6 {
     width: 60px;
     height: 60px;
     border-radius: var(--radius-full);
-    background: rgba(139, 92, 246, 0.1);
+    background: rgba(255, 107, 0, 0.1);
     color: var(--primary);
     font-size: 1.6rem;
     margin-bottom: 16px;
-    border: 1px solid rgba(139, 92, 246, 0.2);
+    border: 1px solid rgba(255, 107, 0, 0.2);
 }
 
 .login-header h2 {
