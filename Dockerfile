@@ -1,4 +1,4 @@
-FROM php:8.2-apache
+FROM php:8.3-apache
 
 # Install system dependencies & PHP extensions for Laravel
 RUN apt-get update && apt-get install -y libpng-dev libjpeg-dev libfreetype6-dev zip git unzip && \
@@ -19,7 +19,7 @@ COPY . /var/www/html/
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Clear any local caches and run build completely ignoring environment checks
+# Clear local composer state and install clean dependencies
 RUN cd /var/www/html && \
     rm -f composer.lock && \
     composer install --no-dev --no-scripts --optimize-autoloader
