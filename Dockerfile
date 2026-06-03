@@ -29,10 +29,10 @@ RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cac
 
 EXPOSE 80
 
-# Run migrations FIRST to create the cache and sessions tables, THEN cache the configuration safely
+# Force cache to use files temporarily so it stops looking for a database table that isn't created yet
 CMD cd /var/www/html && \
-    php artisan config:clear && \
-    php artisan cache:clear && \
+    PHP_CLI_SERVER_WORKERS=1 CACHE_STORE=file SESSION_DRIVER=file php artisan config:clear && \
+    PHP_CLI_SERVER_WORKERS=1 CACHE_STORE=file SESSION_DRIVER=file php artisan cache:clear && \
     php artisan migrate --force && \
     php artisan config:cache && \
     apache2-foreground
