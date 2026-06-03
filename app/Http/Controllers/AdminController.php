@@ -6,6 +6,7 @@ use App\Models\Blog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Artisan; // <-- Imported Artisan facade to flush the cache
 use Illuminate\Support\Str;
 
 class AdminController extends Controller
@@ -110,6 +111,10 @@ class AdminController extends Controller
             'image_path' => $imagePath,
         ]);
 
+        // CLEAR CACHE: Force updates to show up for everyone instantly
+        Artisan::call('config:clear');
+        Artisan::call('cache:clear');
+
         return redirect()->route('admin.dashboard')->with('success', 'Blog created successfully!');
     }
 
@@ -150,6 +155,10 @@ class AdminController extends Controller
             'image_path' => $imagePath,
         ]);
 
+        // CLEAR CACHE: Ensure modifications drop cached versions across all visitor devices
+        Artisan::call('config:clear');
+        Artisan::call('cache:clear');
+
         return redirect()->route('admin.dashboard')->with('success', 'Blog updated successfully!');
     }
 
@@ -163,6 +172,10 @@ class AdminController extends Controller
         }
 
         $blog->delete();
+
+        // CLEAR CACHE: Ensure deleted posts drop off from public dashboard listings instantly
+        Artisan::call('config:clear');
+        Artisan::call('cache:clear');
 
         return redirect()->route('admin.dashboard')->with('success', 'Blog deleted successfully!');
     }
