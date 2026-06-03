@@ -1,9 +1,9 @@
 FROM php:8.3-apache
 
-# Install system dependencies & PHP extensions for Laravel
-RUN apt-get update && apt-get install -y libpng-dev libjpeg-dev libfreetype6-dev zip git unzip && \
+# Install system dependencies & PHP extensions for BOTH MySQL and PostgreSQL
+RUN apt-get update && apt-get install -y libpng-dev libjpeg-dev libfreetype6-dev zip git unzip libpq-dev && \
     docker-php-ext-configure gd --with-freetype --with-jpeg && \
-    docker-php-ext-install pdo pdo_mysql gd
+    docker-php-ext-install pdo pdo_mysql pdo_pgsql gd
 
 # Enable Apache Rewrite for routing
 RUN a2enmod rewrite
@@ -28,3 +28,10 @@ RUN cd /var/www/html && \
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
 EXPOSE 80
+
+# --- Automate cache clearing and migrations on startup ---
+CMD cd /var/www/html && \
+    php artisan config:clear && \
+    php artisan cache:clear && \
+    php artisan migrate --force && \
+    apache2-foreground
