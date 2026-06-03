@@ -29,13 +29,11 @@ RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cac
 
 EXPOSE 80
 
-# --- PRODUCTION DEPLOYMENT BOOTSTRAP LOOP ---
-# 1. Forces local file cache configs temporarily so it doesn't crash on unbuilt tables.
-# 2. Drops previous partial tables and rebuilds + seeds the mock data cleanly.
-# 3. Compiles final production caches and handles the Apache server foreground task.
+# Added 'php artisan storage:link' to make uploaded blog images publicly accessible
 CMD cd /var/www/html && \
     CACHE_STORE=file SESSION_DRIVER=file php artisan config:clear && \
     CACHE_STORE=file SESSION_DRIVER=file php artisan cache:clear && \
+    php artisan storage:link || true && \
     php artisan migrate:fresh --seed --force && \
     php artisan config:cache && \
     apache2-foreground

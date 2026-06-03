@@ -6,13 +6,14 @@ use App\Models\Blog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Artisan; // <-- Imported Artisan facade to flush the cache
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Str;
 
 class AdminController extends Controller
 {
     public function showLogin()
     {
+        // If already logged in, redirect straight to the dashboard; don't show login form
         if (Auth::check()) {
             return redirect()->route('admin.dashboard');
         }
@@ -26,7 +27,9 @@ class AdminController extends Controller
             'password' => 'required',
         ]);
 
-        if (Auth::attempt($credentials)) {
+        // Passing true as the second parameter tells Laravel to remember the user indefinitely 
+        // by saving a secure token in the browser cookies.
+        if (Auth::attempt($credentials, true)) {
             $request->session()->regenerate();
             return redirect()->route('admin.dashboard');
         }
@@ -38,6 +41,7 @@ class AdminController extends Controller
 
     public function showRegister()
     {
+        // If already logged in, redirect straight to the dashboard; don't show registration form
         if (Auth::check()) {
             return redirect()->route('admin.dashboard');
         }
