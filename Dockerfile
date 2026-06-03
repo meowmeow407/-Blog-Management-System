@@ -29,10 +29,11 @@ RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cac
 
 EXPOSE 80
 
-# Force cache to use files temporarily so it stops looking for a database table that isn't created yet
+# Run migrations AND database seeders to populate mock data automatically on deployment
 CMD cd /var/www/html && \
-    PHP_CLI_SERVER_WORKERS=1 CACHE_STORE=file SESSION_DRIVER=file php artisan config:clear && \
-    PHP_CLI_SERVER_WORKERS=1 CACHE_STORE=file SESSION_DRIVER=file php artisan cache:clear && \
+    CACHE_STORE=file SESSION_DRIVER=file php artisan config:clear && \
+    CACHE_STORE=file SESSION_DRIVER=file php artisan cache:clear && \
     php artisan migrate --force && \
+    php artisan db:seed --force && \
     php artisan config:cache && \
     apache2-foreground
