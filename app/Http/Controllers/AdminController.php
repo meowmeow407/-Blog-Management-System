@@ -35,6 +35,37 @@ class AdminController extends Controller
         ])->onlyInput('email');
     }
 
+    public function showRegister()
+    {
+        if (Auth::check()) {
+            return redirect()->route('admin.dashboard');
+        }
+        return view('admin.register');
+    }
+
+    public function register(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'username' => 'required|string|max:255|unique:users',
+            'mobile_no' => 'required|string|max:20',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6|confirmed',
+        ]);
+
+        $user = \App\Models\User::create([
+            'name' => $request->name,
+            'username' => $request->username,
+            'mobile_no' => $request->mobile_no,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+        ]);
+
+        Auth::login($user);
+
+        return redirect()->route('admin.dashboard')->with('success', 'Account registered successfully!');
+    }
+
     public function logout(Request $request)
     {
         Auth::logout();

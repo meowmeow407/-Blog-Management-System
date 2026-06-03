@@ -38,7 +38,8 @@
         </form>
 
         <div class="login-tip">
-            <p><i class="fa-solid fa-circle-info"></i> Default Demo Credentials:<br><strong>admin@blog.com</strong> / <strong>admin123</strong></p>
+            <p>Don't have an admin account? <a href="{{ route('admin.register') }}" style="color: var(--accent); font-weight: 600;">Sign up here</a></p>
+            <p style="margin-top: 10px; font-size: 0.75rem;"><i class="fa-solid fa-circle-info"></i> Demo: <strong>admin@blog.com</strong> / <strong>admin123</strong></p>
         </div>
     </div>
 </div>

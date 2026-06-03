@@ -12,6 +12,8 @@ Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blogs.show');
 // Admin Auth Routes
 Route::get('/admin/login', [AdminController::class, 'showLogin'])->name('login');
 Route::post('/admin/login', [AdminController::class, 'login'])->name('admin.login.submit');
+Route::get('/admin/register', [AdminController::class, 'showRegister'])->name('admin.register');
+Route::post('/admin/register', [AdminController::class, 'register'])->name('admin.register.submit');
 Route::post('/admin/logout', [AdminController::class, 'logout'])->name('admin.logout');
 
 // Protected Admin Routes
