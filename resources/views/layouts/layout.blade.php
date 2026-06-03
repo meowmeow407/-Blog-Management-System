@@ -34,6 +34,9 @@
             </div>
             
             <nav class="nav-menu">
+                <button id="theme-toggle" class="nav-link theme-toggle-btn" title="Toggle Light/Dark Theme" style="cursor: pointer;">
+                    <i class="fa-solid fa-moon theme-toggle-icon"></i>
+                </button>
                 <a href="{{ route('blogs.index') }}" class="nav-link {{ request()->routeIs('blogs.index') ? 'active' : '' }}">
                     <i class="fa-solid fa-house"></i> Home
                 </a>
@@ -76,6 +79,30 @@
     
     <script>
     $(document).ready(function() {
+        // Theme Toggle Logic
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        if (savedTheme === 'light') {
+            $('body').addClass('light-theme');
+            $('.theme-toggle-icon').removeClass('fa-moon').addClass('fa-sun');
+        } else {
+            $('body').removeClass('light-theme');
+            $('.theme-toggle-icon').removeClass('fa-sun').addClass('fa-moon');
+        }
+
+        $('#theme-toggle').on('click', function() {
+            $('body').toggleClass('light-theme');
+            
+            let theme = 'dark';
+            if ($('body').hasClass('light-theme')) {
+                theme = 'light';
+                $('.theme-toggle-icon').removeClass('fa-moon').addClass('fa-sun');
+            } else {
+                $('.theme-toggle-icon').removeClass('fa-sun').addClass('fa-moon');
+            }
+            localStorage.setItem('theme', theme);
+        });
+
+        // Global Search Redirect Logic
         $('#global-search-input').on('keypress', function(e) {
             if (e.which === 13) { // Enter key
                 const val = $(this).val();
