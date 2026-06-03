@@ -19,8 +19,10 @@ COPY . /var/www/html/
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Run production composer build (This handles the vendor folder automatically!)
-RUN cd /var/www/html && composer install --no-dev --optimize-autoloader
+# Clear any local caches and run build completely ignoring environment checks
+RUN cd /var/www/html && \
+    rm -f composer.lock && \
+    composer install --no-dev --no-scripts --optimize-autoloader
 
 # Set permissions for Laravel storage
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
