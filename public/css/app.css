@@ -104,9 +104,7 @@ h1, h2, h3, h4, h5, h6 {
     left: 0;
     right: 0;
     height: 70px;
-    background: var(--bg-glass);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    background: #000000;
     border-bottom: 1px solid var(--border-glass);
     z-index: 1000;
 }
