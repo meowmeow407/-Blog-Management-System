@@ -18,13 +18,7 @@
             <button id="reset-filters" class="btn-reset" title="Reset all filters"><i class="fa-solid fa-rotate-left"></i></button>
         </div>
         
-        <div class="filter-group">
-            <label for="search-input"><i class="fa-solid fa-magnifying-glass"></i> Search</label>
-            <div class="search-input-wrapper">
-                <input type="text" id="search-input" placeholder="Type keywords..." autocomplete="off">
-                <span class="search-spinner" id="search-loading" style="display: none;"><i class="fa-solid fa-spinner fa-spin"></i></span>
-            </div>
-        </div>
+
 
         <div class="filter-group">
             <label><i class="fa-solid fa-tags"></i> Category</label>
@@ -69,12 +63,12 @@ $(document).ready(function() {
 
     // Trigger filter update
     function updateFilters(page = 1) {
-        const search = $('#search-input').val();
+        const search = $('#global-search-input').val();
         const date = $('#date-input').val();
         
         // Show loading state
         $('#global-loading').fadeIn(200);
-        $('#search-loading').show();
+        $('#global-search-loading').show();
 
         $.ajax({
             url: "{{ route('blogs.filter') }}",
@@ -98,7 +92,7 @@ $(document).ready(function() {
             complete: function() {
                 // Hide loading states
                 $('#global-loading').fadeOut(200);
-                $('#search-loading').hide();
+                $('#global-search-loading').hide();
             }
         });
     }
@@ -138,7 +132,7 @@ $(document).ready(function() {
     });
 
     // Search input change handler with Debounce to prevent server flooding
-    $('#search-input').on('keyup input', function() {
+    $('#global-search-input').on('keyup input', function() {
         clearTimeout(searchTimer);
         searchTimer = setTimeout(function() {
             updateFilters();
@@ -152,7 +146,7 @@ $(document).ready(function() {
 
     // Reset filters handler
     $('#reset-filters').on('click', function() {
-        $('#search-input').val('');
+        $('#global-search-input').val('');
         $('#date-input').val('');
         $('.category-pill').removeClass('active');
         $('.category-pill[data-category=""]').addClass('active');
@@ -174,6 +168,11 @@ $(document).ready(function() {
             scrollTop: $('.blog-main-list').offset().top - 100
         }, 400);
     });
+
+    // If pre-filled on load (e.g. redirected from other page with ?search=X)
+    if ($('#global-search-input').val()) {
+        updateFilters();
+    }
 });
 </script>
 @endsection

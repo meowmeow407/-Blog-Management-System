@@ -25,6 +25,13 @@
                 <span class="logo-icon"><i class="fa-solid fa-feather-pointed"></i></span>
                 <span class="logo-text">Chronicle</span>
             </a>
+
+            <!-- Global Top Search Bar -->
+            <div class="header-search-wrapper">
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                <input type="text" id="global-search-input" placeholder="Search for topics, notifications & sources..." value="{{ request('search') }}" autocomplete="off">
+                <span class="search-spinner" id="global-search-loading" style="display: none;"><i class="fa-solid fa-spinner fa-spin"></i></span>
+            </div>
             
             <nav class="nav-menu">
                 <a href="{{ route('blogs.index') }}" class="nav-link {{ request()->routeIs('blogs.index') ? 'active' : '' }}">
@@ -66,6 +73,19 @@
             </div>
         </div>
     </footer>
+    
+    <script>
+    $(document).ready(function() {
+        $('#global-search-input').on('keypress', function(e) {
+            if (e.which === 13) { // Enter key
+                const val = $(this).val();
+                if (window.location.pathname !== '/' && window.location.pathname !== '/index.php') {
+                    window.location.href = "{{ route('blogs.index') }}?search=" + encodeURIComponent(val);
+                }
+            }
+        });
+    });
+    </script>
     
     @yield('scripts')
 </body>
