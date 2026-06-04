@@ -29,11 +29,12 @@ RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cac
 
 EXPOSE 80
 
-# Added 'php artisan storage:link' to make uploaded blog images publicly accessible
+# This updated chain creates your public storage link, builds missing session tables, 
+# and runs migrations safely without wiping out your existing production data!
 CMD cd /var/www/html && \
-    CACHE_STORE=file SESSION_DRIVER=file php artisan config:clear && \
-    CACHE_STORE=file SESSION_DRIVER=file php artisan cache:clear && \
+    CACHE_STORE=file php artisan config:clear && \
+    CACHE_STORE=file php artisan cache:clear && \
     php artisan storage:link || true && \
-    php artisan migrate:fresh --seed --force && \
+    php artisan migrate --force && \
     php artisan config:cache && \
     apache2-foreground
