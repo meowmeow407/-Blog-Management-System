@@ -24,7 +24,8 @@
             </div>
         @endif
 
-        <form action="{{ route('admin.store') }}" method="POST" enctype="multipart/form-data" class="dashboard-form">
+        {{-- Note: Removed enctype="multipart/form-data" since we are passing web link strings now --}}
+        <form action="{{ route('admin.store') }}" method="POST" class="dashboard-form">
             @csrf
 
             <div class="form-grid">
@@ -45,11 +46,12 @@
                     </select>
                 </div>
 
+                {{-- UPDATED: Swapped local file uploader with a permanent Image URL string input --}}
                 <div class="form-field-group">
-                    <label for="image">Featured Image</label>
+                    <label for="image_path">Featured Image URL</label>
                     <div class="file-upload-wrapper">
-                        <input type="file" name="image" id="image" accept="image/*">
-                        <span class="file-upload-help">JPG, PNG, GIF up to 2MB (optional)</span>
+                        <input type="url" name="image_path" id="image_path" value="{{ old('image_path') }}" placeholder="https://example.com/banner-image.jpg" required>
+                        <span class="file-upload-help">Paste a hotlink from Unsplash, Imgur, or Postimages</span>
                     </div>
                 </div>
 
