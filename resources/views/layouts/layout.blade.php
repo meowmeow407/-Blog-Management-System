@@ -6,15 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title', 'Chronicle - Modern Blog Platform')</title>
     <meta name="description" content="A modern, high-performance responsive blogging platform with real-time AJAX filtering and robust administration dashboard.">
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- FontAwesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    <!-- jQuery -->
+    
+    <link rel="stylesheet" href="{{ secure_asset('css/style.css') }}">
+    
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
@@ -26,7 +24,6 @@
                 <span class="logo-text">Chronicle</span>
             </a>
 
-            <!-- Global Top Search Bar -->
             <div class="header-search-wrapper">
                 <i class="fa-solid fa-magnifying-glass search-icon"></i>
                 <input type="text" id="global-search-input" placeholder="Search for topics, notifications & sources..." value="{{ request('search') }}" autocomplete="off">
