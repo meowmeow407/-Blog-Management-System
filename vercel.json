@@ -20,5 +20,13 @@
             "dest": "/api/index.php"
         }
     ],
-    "outputDirectory": "public"
+    "config": {
+        "includeFiles": [
+            "config/**",
+            "routes/**",
+            "bootstrap/**",
+            "storage/**",
+            "resources/views/**"
+        ]
+    }
 }
