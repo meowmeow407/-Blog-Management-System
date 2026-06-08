@@ -76,6 +76,7 @@
     
     <script>
     $(document).ready(function() {
+        // Theme Toggle Logic
         const savedTheme = localStorage.getItem('theme') || 'dark';
         if (savedTheme === 'light') {
             $('body').addClass('light-theme');
@@ -87,6 +88,7 @@
 
         $('#theme-toggle').on('click', function() {
             $('body').toggleClass('light-theme');
+            
             let theme = 'dark';
             if ($('body').hasClass('light-theme')) {
                 theme = 'light';
@@ -97,8 +99,9 @@
             localStorage.setItem('theme', theme);
         });
 
+        // Global Search Redirect Logic
         $('#global-search-input').on('keypress', function(e) {
-            if (e.which === 13) {
+            if (e.which === 13) { // Enter key
                 const val = $(this).val();
                 if (window.location.pathname !== '/' && window.location.pathname !== '/index.php') {
                     window.location.href = "{{ route('blogs.index') }}?search=" + encodeURIComponent(val);
@@ -107,6 +110,7 @@
         });
     });
     </script>
+    
     @yield('scripts')
 </body>
 </html>
