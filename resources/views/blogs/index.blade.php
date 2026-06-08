@@ -20,7 +20,7 @@
                     <label for="date-input"><i class="fa-regular fa-calendar"></i></label>
                     <input type="date" id="date-input">
                 </div>
-                <button id="reset-filters" class="btn-reset" title="Reset all filters"><i class="fa-solid fa-rotate-right"></i></button>
+                <button id="reset-filters" class="btn-reset" title="Reset all filters"><i class="fa-solid fa-rotate-left"></i></button>
             </div>
         </div>
         

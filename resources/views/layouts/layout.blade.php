@@ -11,11 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    @if(file_exists(public_path('css/style.css')))
-        <link rel="stylesheet" href="{{ secure_asset('css/style.css') }}">
-    @else
-        <link rel="stylesheet" href="{{ secure_asset('css/app.css') }}">
-    @endif
+    <link rel="stylesheet" href="{{ secure_asset('css/style.css') }}">
     
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -80,7 +76,6 @@
     
     <script>
     $(document).ready(function() {
-        // Theme Toggle Logic
         const savedTheme = localStorage.getItem('theme') || 'dark';
         if (savedTheme === 'light') {
             $('body').addClass('light-theme');
@@ -92,7 +87,6 @@
 
         $('#theme-toggle').on('click', function() {
             $('body').toggleClass('light-theme');
-            
             let theme = 'dark';
             if ($('body').hasClass('light-theme')) {
                 theme = 'light';
@@ -103,9 +97,8 @@
             localStorage.setItem('theme', theme);
         });
 
-        // Global Search Redirect Logic
         $('#global-search-input').on('keypress', function(e) {
-            if (e.which === 13) { // Enter key
+            if (e.which === 13) {
                 const val = $(this).val();
                 if (window.location.pathname !== '/' && window.location.pathname !== '/index.php') {
                     window.location.href = "{{ route('blogs.index') }}?search=" + encodeURIComponent(val);
@@ -114,7 +107,6 @@
         });
     });
     </script>
-    
     @yield('scripts')
 </body>
 </html>
